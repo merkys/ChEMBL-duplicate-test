@@ -13,3 +13,9 @@ To run the workflow:
 2. Execute `make distclean` to cleanup precomputed results.
 
 3. Execute `make` (`-j` should help to speed up a bit using parallel processes).
+
+License
+-------
+
+[ChEMBL v13](https://ftp.ebi.ac.uk/pub/databases/chembl/ChEMBLdb/releases/chembl_13/) (version used in the publication) data is downloaded on-the-fly and is licensed under CC-BY-SA 3.0 Unported.
+The Makefile is CC0.
