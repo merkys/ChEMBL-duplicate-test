@@ -24,10 +24,10 @@ $(INCHI_DUPLICATE_LIST): $(CHEMBL_REPRESENTATIONS)
 	cut -f 1,4 $< | tail -n +2 | sort -k2.2 | uniq -f 1 --all-repeated=separate > $@
 
 $(SMI_DIR)/chembl_13.%smi chembl_13.%smi.err: $(CHEMBL_SDFS)
-	obabel $< -osmi -O$(SMI_DIR)/chembl_13.$*smi -x$* 2> $(SMI_DIR)/chembl_13.$*smi.err
+	bin/sdf-to-smi -x$* $< > $(SMI_DIR)/chembl_13.$*smi 2> $(SMI_DIR)/chembl_13.$*smi.err
 
 %-duplicates.tab: $(SMI_DIR)/chembl_13.%
-	paste <(grep ^CHEMBL $(CHEMBL_SDFS)) $< | sed 's/\t$$//' | sort -k2.2 | uniq -f 1 --all-repeated=separate > $@
+	sort -k2.2 $< | uniq -f 1 --all-repeated=separate > $@
 
 # Target to download input files from ChEMBL:
 inputs/%:
