@@ -10,9 +10,11 @@ To run the workflow:
 
 1. Ensure Open Babel v2.3.2 (the version used in the publication) is installed and executable using `obabel`.
 
-2. Execute `make distclean` to cleanup precomputed results.
+2. Install `IPC::Run3` Perl module.
 
-3. Execute `make` (`-j` should help to speed up a bit using parallel processes).
+3. Execute `make distclean` to cleanup precomputed results.
+
+4. Execute `make` (`-j` should help to speed up a bit using parallel processes).
 
 License
 -------
