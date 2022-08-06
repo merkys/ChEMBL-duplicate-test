@@ -1,0 +1,28 @@
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+
+use IPC::Run3;
+
+my $obabel_flags = shift @ARGV;
+local $/ = "\n" . '$$$$' . "\n";
+
+while( <> ) {
+    next unless /^(CHEMBL\d+)$/m;
+    my $CHEMBL_ID = $1;
+
+    my( $stdout, $stderr );
+    run3 [ 'obabel', '-isdf', '/dev/stdin', '-osmi', '-O/dev/stdout', $obabel_flags ],
+         \$_,
+         \$stdout,
+         \$stderr;
+
+    if( $stdout ) {
+        $stdout =~ s/\t+$//;
+        print $CHEMBL_ID, "\t", $stdout;
+    }
+    for( split "\n", $stderr ) {
+        print STDERR $CHEMBL_ID, "\t", $_, "\n";
+    }
+}
